@@ -1,1 +1,57 @@
-.
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="../frontend/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="header-sidebar">
+                <img src="https://cdn-icons-png.freepik.com/512/5962/5962463.png" width="40" height="40" alt="Avatar" class="my-avatar">
+                <div class="search-bar">
+                    <i class="fa fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm">
+                </div>
+            </div>
+            <div class="contact-list">
+                <div class="contact-item active">
+                    <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/12/ten-nhom-chat.jpg" width="40" height="40" alt="Group">
+                    <div class="contact-info">
+                        <p class="name">Nhóm Lập Trình Mạng</p>
+                        <p class="last-msg" id="last-msg-1"></p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="chat-window">
+            <header class="chat-header">
+                <div class="user-info">
+                    <p class="name">Nhóm 6</p>
+                    <p class="status">Đang hoạt động</p>
+                </div>
+                <div class="header-icons">
+                    <i class="fa fa-video"></i>
+                    <i class="fa fa-phone"></i>
+                </div>
+            </header>
+
+            <div class="message-container" id="message-box">
+                <div class="msg received">Chào mừng bạn đến với App Chat!</div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." autocomplete="off">
+                <div class="input-actions">
+                    <button id="send-btn"><i class="fa fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/frontend/js/client.js"></script>
+</body>
+</html>
