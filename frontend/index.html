@@ -9,9 +9,18 @@
 </head>
 <body>
     <div class="app-container">
+        <nav class="main-menu">
+            <div class="menu-top">
+                <img src="https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-user-flat-character-avatar-png-image_1442182.jpg" alt="Avatar" class="menu-avatar">
+                <div class="menu-item active"><i class="fa-regular fa-comment"></i></div>
+            </div>
+            <div class="menu-bottom">
+                <div class="menu-item" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></div>
+            </div>
+        </nav>
         <aside class="sidebar">
             <div class="header-sidebar">
-                <img src="https://cdn-icons-png.freepik.com/512/5962/5962463.png" width="40" height="40" alt="Avatar" class="my-avatar">
+                <img src="https://cdn-icons-png.freepik.com/512/5962/5962463.png" width="40" height="40" alt="Avatar" class="Logo">
                 <div class="search-bar">
                     <i class="fa fa-search"></i>
                     <input type="text" placeholder="Tìm kiếm">
@@ -52,6 +61,36 @@
             </div>
         </main>
     </div>
-    <script src="/frontend/js/client.js"></script>
+    <div id="user-info-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thông tin cá nhân</h3>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="user-cover"></div>
+                <div class="avatar-upload">
+                    <img src="https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-user-flat-character-avatar-png-image_1442182.jpg" alt="Avatar" class="modal-avatar" id="user-avatar-img">
+                </div>
+                
+                <div class="edit-form">
+                    <div class="input-group-edit">
+                        <label>Tên hiển thị</label>
+                        <input type="text" id="edit-name" placeholder="Nhập tên mới">
+                    </div>
+                    <div class="input-group-edit">
+                        <label>Số điện thoại</label>
+                        <input type="text" id="edit-phone" value="0123 456 789">
+                    </div>
+                    <div class="input-group-edit">
+                        <label>Ngày sinh</label>
+                        <input type="date" id="edit-dob" value="2000-01-01">
+                    </div>
+                    <button class="save-btn" onclick="saveUserInfo()">LƯU THAY ĐỔI</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/client.js"></script>
 </body>
 </html>

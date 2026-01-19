@@ -144,3 +144,172 @@ body {
 .header-icons i:hover {
     color: #0068ff; 
 }
+/* Giao diện Auth */
+.auth-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #f0f2f5;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+}
+
+.auth-box {
+    background: white; padding: 40px; border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center; width: 400px;
+}
+
+.auth-box h2 { margin: 20px 0; font-size: 1.2rem; color: #333; }
+
+.input-group input {
+    width: 100%; padding: 12px; margin-bottom: 15px;
+    border: 1px solid #ddd; border-radius: 5px; outline: none;
+}
+
+.main-btn {
+    width: 100%; padding: 12px; background: #0068ff;
+    color: white; border: none; border-radius: 25px;
+    font-weight: bold; cursor: pointer; margin-top: 10px;
+}
+
+.auth-switch { margin-top: 20px; font-size: 14px; }
+.auth-switch a { color: #0068ff; text-decoration: none; }
+/* Thanh Menu trái cùng */
+.main-menu {
+    width: 64px;
+    background-color: #0068ff; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.menu-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.menu-item {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.menu-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menu-item.active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Đảm bảo app-container chia 3 cột */
+.app-container {
+    display: flex; /* Quan trọng để 3 phần nằm ngang */
+    width: 100vw;
+    height: 100vh;
+}
+/* Nền tối phía sau Modal */
+.modal {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* Nội dung Modal */
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    width: 350px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.close-modal { cursor: pointer; font-size: 24px; }
+
+.modal-body { text-align: center; padding-bottom: 20px; }
+
+.user-cover { height: 100px; background: linear-gradient(to right, #00c6ff, #0072ff); }
+
+.modal-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%; border: 3px solid white;
+    margin-top: -40px;
+}
+
+.info-details { text-align: left; padding: 20px; line-height: 2; }
+
+.edit-btn {
+    width: 80%; padding: 10px;
+    border: 1px solid #0068ff; color: #0068ff;
+    background: white; border-radius: 5px; cursor: pointer;
+}
+.edit-form {
+    padding: 20px;
+    text-align: left;
+}
+
+.input-group-edit {
+    margin-bottom: 15px;
+}
+
+.input-group-edit label {
+    display: block;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.input-group-edit input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+.input-group-edit input:focus {
+    border-color: #0068ff;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #0068ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.save-btn:hover {
+    background-color: #0056d2;
+}
