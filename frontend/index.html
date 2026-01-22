@@ -4,93 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Application</title>
-    <link rel="stylesheet" href="../frontend/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="app-container">
-        <nav class="main-menu">
-            <div class="menu-top">
-                <img src="https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-user-flat-character-avatar-png-image_1442182.jpg" alt="Avatar" class="menu-avatar">
-                <div class="menu-item active"><i class="fa-regular fa-comment"></i></div>
-            </div>
-            <div class="menu-bottom">
-                <div class="menu-item" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></div>
-            </div>
-        </nav>
-        <aside class="sidebar">
-            <div class="header-sidebar">
-                <img src="https://cdn-icons-png.freepik.com/512/5962/5962463.png" width="40" height="40" alt="Avatar" class="Logo">
-                <div class="search-bar">
-                    <i class="fa fa-search"></i>
-                    <input type="text" placeholder="Tìm kiếm">
-                </div>
-            </div>
-            <div class="contact-list">
-                <div class="contact-item active">
-                    <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/12/ten-nhom-chat.jpg" width="40" height="40" alt="Group">
-                    <div class="contact-info">
-                        <p class="name">Nhóm Lập Trình Mạng</p>
-                        <p class="last-msg" id="last-msg-1"></p>
-                    </div>
-                </div>
-            </div>
-        </aside>
 
-        <main class="chat-window">
-            <header class="chat-header">
-                <div class="user-info">
-                    <p class="name">Nhóm 6</p>
-                    <p class="status">Đang hoạt động</p>
-                </div>
-                <div class="header-icons">
-                    <i class="fa fa-video"></i>
-                    <i class="fa fa-phone"></i>
-                </div>
-            </header>
+<div class="app-container">
 
-            <div class="message-container" id="message-box">
-                <div class="msg received">Chào mừng bạn đến với App Chat!</div>
+    <!-- ===== LEFT MENU ===== -->
+    <nav class="main-menu">
+        <div class="menu-top">
+            <img
+                src="https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-user-flat-character-avatar-png-image_1442182.jpg"
+                alt="Avatar"
+                class="menu-avatar"
+            >
+            <div class="menu-item active">
+                <i class="fa-regular fa-comment"></i>
+            </div>
+        </div>
+
+        <div class="menu-bottom">
+            <div class="menu-item" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+
+        <!-- Header + Search -->
+        <div class="header-sidebar">
+            <img
+                src="https://cdn-icons-png.freepik.com/512/5962/5962463.png"
+                width="40"
+                height="40"
+                alt="Logo"
+                class="Logo"
+            >
+
+            <div class="search-bar">
+                <i class="fa fa-search"></i>
+                <input
+                    type="text"
+                    id="search-phone"
+                    placeholder="Tìm theo số điện thoại"
+                    autocomplete="off"
+                >
+
+                <!-- SEARCH RESULT -->
+                <div id="search-result" class="search-result"></div>
+            </div>
+        </div>
+
+        <!-- ===== CONTACT LIST (DYNAMIC) ===== -->
+        <!-- JS sẽ tự render các cuộc chat 1–1 vào đây -->
+        <div class="contact-list">
+            <!-- KHÔNG hard-code contact -->
+        </div>
+
+    </aside>
+
+    <!-- ===== CHAT WINDOW ===== -->
+    <main class="chat-window">
+
+        <!-- Header chat -->
+        <header class="chat-header">
+            <div class="user-info">
+                <p class="name" id="chat-user-name">Chọn người để nhắn tin</p>
+                <p class="status" id="chat-user-status">Online</p>
             </div>
 
-            <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." autocomplete="off">
-                <div class="input-actions">
-                    <button id="send-btn"><i class="fa fa-paper-plane"></i></button>
-                </div>
+            <div class="header-icons">
+                <i class="fa fa-video"></i>
+                <i class="fa fa-phone"></i>
             </div>
-        </main>
-    </div>
-    <div id="user-info-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Thông tin cá nhân</h3>
-                <span class="close-modal" onclick="closeModal()">&times;</span>
+        </header>
+
+        <!-- Message box -->
+        <div class="message-container" id="message-box">
+            <div class="msg received">
+                Chào mừng bạn đến với App Chat!
             </div>
-            <div class="modal-body">
-                <div class="user-cover"></div>
-                <div class="avatar-upload">
-                    <img src="https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-user-flat-character-avatar-png-image_1442182.jpg" alt="Avatar" class="modal-avatar" id="user-avatar-img">
+        </div>
+
+        <!-- Input -->
+        <div class="chat-input-area">
+            <input
+                type="text"
+                id="chat-input"
+                placeholder="Nhập tin nhắn..."
+                autocomplete="off"
+            >
+            <div class="input-actions">
+                <button id="send-btn">
+                    <i class="fa fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<!-- ===== USER INFO MODAL (GIỮ NGUYÊN – CHƯA DÙNG) ===== -->
+<div id="user-info-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Thông tin cá nhân</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+
+        <div class="modal-body">
+            <div class="user-cover"></div>
+
+            <div class="avatar-upload">
+                <img
+                    src="https://png.pngtree.com/element_our/20190603/ourlarge/pngtree-user-flat-character-avatar-png-image_1442182.jpg"
+                    alt="Avatar"
+                    class="modal-avatar"
+                >
+            </div>
+
+            <div class="edit-form">
+                <div class="input-group-edit">
+                    <label>Tên hiển thị</label>
+                    <input type="text" placeholder="Nhập tên mới">
                 </div>
-                
-                <div class="edit-form">
-                    <div class="input-group-edit">
-                        <label>Tên hiển thị</label>
-                        <input type="text" id="edit-name" placeholder="Nhập tên mới">
-                    </div>
-                    <div class="input-group-edit">
-                        <label>Số điện thoại</label>
-                        <input type="text" id="edit-phone" value="0123 456 789">
-                    </div>
-                    <div class="input-group-edit">
-                        <label>Ngày sinh</label>
-                        <input type="date" id="edit-dob" value="2000-01-01">
-                    </div>
-                    <button class="save-btn" onclick="saveUserInfo()">LƯU THAY ĐỔI</button>
+
+                <div class="input-group-edit">
+                    <label>Số điện thoại</label>
+                    <input type="text">
                 </div>
+
+                <div class="input-group-edit">
+                    <label>Ngày sinh</label>
+                    <input type="date">
+                </div>
+
+                <button class="save-btn">LƯU THAY ĐỔI</button>
             </div>
         </div>
     </div>
-    <script src="js/client.js"></script>
+</div>
+
+<!-- JS -->
+<script src="js/client.js"></script>
+
 </body>
 </html>

@@ -10,15 +10,27 @@
         <div class="auth-box">
             <img src="https://cdn-icons-png.freepik.com/512/5962/5962463.png" width="80" alt="Zalo Logo">
             <h2>Tạo tài khoản mới</h2>
+
             <div class="input-group">
-                <input type="text" id="reg-user" placeholder="Tên đăng nhập">
+                <!-- SỐ ĐIỆN THOẠI: KHỚP LOGIC AUTH -->
+                <input type="text" id="reg-phone" placeholder="Số điện thoại">
+
+                <!-- HỌ TÊN THẬT -->
+                <input type="text" id="reg-name" placeholder="Họ và tên">
+
+                <!-- MẬT KHẨU -->
                 <input type="password" id="reg-pass" placeholder="Mật khẩu">
                 <input type="password" id="reg-repass" placeholder="Nhập lại mật khẩu">
             </div>
+
             <button class="main-btn" onclick="handleRegister()">ĐĂNG KÝ</button>
-            <p class="auth-switch">Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+
+            <p class="auth-switch">
+                Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+            </p>
         </div>
     </div>
+
     <script src="js/script.js"></script>
 </body>
 </html>

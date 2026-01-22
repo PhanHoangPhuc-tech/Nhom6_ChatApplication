@@ -1,29 +1,139 @@
-// Xử lý Đăng nhập
-function handleLogin() {
-    const user = document.getElementById('login-user').value;
-    const pass = document.getElementById('login-pass').value;
+/* =====================================================
+   GLOBAL SOCKET (AUTH)
+===================================================== */
+let socket = null;
 
-    if (user && pass) {
-        
-        console.log("Đang xác thực...");
-        // Lưu tên user vào bộ nhớ tạm để sang trang chat hiển thị
-        localStorage.setItem('currentUser', user);
-        window.location.href = 'index.html'; // Chuyển sang trang chat
-    } else {
-        alert("Vui lòng nhập đầy đủ!");
+/* =====================================================
+   INIT SOCKET FOR AUTH PAGES
+===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const isLoginPage = document.getElementById("login-phone");
+    const isRegisterPage = document.getElementById("reg-phone");
+
+    // chỉ init socket khi ở login / register
+    if (isLoginPage || isRegisterPage) {
+        initAuthSocket();
     }
+
+    // nếu đã login rồi thì không cho quay lại login
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const currentUser = localStorage.getItem("currentUser");
+
+    if (isLoggedIn === "true" && currentUser && isLoginPage) {
+        window.location.href = "index.html";
+    }
+});
+
+/* =====================================================
+   INIT AUTH SOCKET
+===================================================== */
+function initAuthSocket() {
+    socket = new WebSocket("ws://127.0.0.1:8765");
+
+    socket.onopen = () => {
+        console.log("Auth socket connected");
+    };
+
+    socket.onmessage = (event) => {
+        const res = JSON.parse(event.data);
+
+        /* ===== LOGIN SUCCESS ===== */
+        if (res.status === "success" && res.action === "login") {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("currentUser", res.phone);
+
+            window.location.href = "index.html";
+            return;
+        }
+
+        /* ===== REGISTER SUCCESS ===== */
+        if (res.status === "success" && res.action === "register") {
+            alert("Đăng ký thành công! Vui lòng đăng nhập.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        /* ===== ERROR ===== */
+        if (res.status === "error") {
+            alert(res.message || "Có lỗi xảy ra");
+        }
+    };
+
+    socket.onclose = () => {
+        console.log("Auth socket closed");
+    };
 }
 
-// Xử lý Đăng ký
-function handleRegister() {
-    const user = document.getElementById('reg-user').value;
-    const pass = document.getElementById('reg-pass').value;
-    const repass = document.getElementById('reg-repass').value;
+/* =====================================================
+   LOGIN
+===================================================== */
+function handleLogin() {
+    const phoneInput = document.getElementById("login-phone");
+    const passInput = document.getElementById("login-pass");
 
-    if (user && pass === repass) {
-        alert("Đăng ký thành công! Hãy đăng nhập.");
-        window.location.href = 'login.html';
-    } else {
-        alert("Mật khẩu không khớp hoặc thông tin trống!");
+    if (!phoneInput || !passInput) return;
+
+    const phone = phoneInput.value.trim();
+    const password = passInput.value.trim();
+
+    if (!phone || !password) {
+        alert("Vui lòng nhập đầy đủ thông tin");
+        return;
     }
+
+    socket.send(JSON.stringify({
+        type: "auth",
+        action: "login",
+        phone: phone,
+        password: password
+    }));
+}
+
+/* =====================================================
+   REGISTER
+===================================================== */
+function handleRegister() {
+    const phoneInput = document.getElementById("reg-phone");
+    const nameInput = document.getElementById("reg-name");
+    const passInput = document.getElementById("reg-pass");
+    const repassInput = document.getElementById("reg-repass");
+
+    if (!phoneInput || !nameInput || !passInput || !repassInput) return;
+
+    const phone = phoneInput.value.trim();
+    const fullname = nameInput.value.trim();
+    const password = passInput.value.trim();
+    const repass = repassInput.value.trim();
+
+    if (!phone || !fullname || !password || !repass) {
+        alert("Vui lòng nhập đầy đủ thông tin");
+        return;
+    }
+
+    if (!/^0\d{9}$/.test(phone)) {
+        alert("Số điện thoại không hợp lệ");
+        return;
+    }
+
+    if (password !== repass) {
+        alert("Mật khẩu không khớp");
+        return;
+    }
+
+    socket.send(JSON.stringify({
+        type: "auth",
+        action: "register",
+        phone: phone,
+        full_name: fullname,
+        password: password
+    }));
+}
+
+/* =====================================================
+   LOGOUT (DỰ PHÒNG – KHÔNG DÙNG Ở INDEX)
+===================================================== */
+function logout() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
 }
